@@ -1,1 +1,1 @@
-# plateform-website
+# platform-website
