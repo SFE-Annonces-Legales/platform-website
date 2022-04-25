@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .btn-blue-primary{
+        @apply text-white text-base bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none
+            font-medium rounded-lg px-5 py-2.5 text-center mx-3 md:mx-0;
+    }
+    .btn-blue-secondary{
+        @apply text-blue-900 hover:underline focus:ring-4 focus:outline-none
+            font-medium rounded-lg text-base px-5 py-2.5 text-center mx-3 md:mx-0;
+    }
+
+    .btn-white-primary {
+        @apply text-white text-lg bg-blue-900 hover:underline focus:ring-4 focus:outline-none
+            font-medium rounded-lg px-5 py-2.5 text-center mx-3 md:mx-0 shadow-lg;
+    }
+
+    .btn-white-secondary{
+        @apply hover:underline focus:ring-4 focus:outline-none
+            font-medium rounded-lg text-base px-5 py-2.5 text-center mx-3 md:mx-0;
+    }
+
+}

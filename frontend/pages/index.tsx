@@ -1,20 +1,14 @@
-import type { GetStaticProps, NextPage } from 'next'
-import axios from 'axios'
+import type { NextPage } from 'next';
+import { MouseEvent, useState } from 'react';
+import HomePage from '../components/pages/HomePage';
+import http from '../http';
+// import HomePage from '../components/pages/HomePage';
 
-const Home: NextPage<{ text: string }> = ({ text }) => {
+const Home: NextPage = () => {
+
   return (
-    <h1 className='text-7xl text-center font-bold text-red-900'>{ text }</h1>
+    <HomePage/>
   )
-}
-
-
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await axios.get('http://localhost:8000/api/hello');
-  return {
-    props: {
-      text: res.data.text
-    }
-  }
 }
 
 export default Home
