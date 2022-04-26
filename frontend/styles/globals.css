@@ -22,4 +22,8 @@
             font-medium rounded-lg text-base px-5 py-2.5 text-center mx-3 md:mx-0;
     }
 
+    .max-w-45 {
+        max-width: 45%;
+    }
+
 }
