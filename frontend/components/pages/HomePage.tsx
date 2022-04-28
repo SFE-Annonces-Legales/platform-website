@@ -1,13 +1,9 @@
-import Image from "next/image";
 import { FunctionComponent } from "react";
 import Footer from "../composed/Footer";
-import PricingCard from "../composed/home/PricingCard";
 import AboutSection from "../composed/home/sections/AboutSection";
 import HeroSection from "../composed/home/sections/HeroSection";
 import PricingSection from "../composed/home/sections/PricingSection";
 import StepsSection from "../composed/home/sections/StepsSection";
-import TextWithImage from "../composed/home/TextWithImage";
-import NavBar from "../composed/NavBar";
 import MainLayout from "../layouts/MainLayout";
 
 interface HomePageProps { }
@@ -16,7 +12,7 @@ const HomePage: FunctionComponent<HomePageProps> = () => {
 
     return (
         <MainLayout>
-            <main className="" id="hero">
+            <main id="hero">
                 <HeroSection />
                 <div className="px-2 sm:px-6 lg:px-8 pt-10 pb-20" id="about">
                     <AboutSection />

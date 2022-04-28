@@ -4,7 +4,7 @@ import NavBar from "../composed/NavBar";
 
 const MainLayout: FunctionComponent<PropsWithChildren<{}>> = ({ children }) => {
     return (
-        <div className="w-full">
+        <div className="w-full min-h-screen">
             <NavBar />
             { children }
         </div>

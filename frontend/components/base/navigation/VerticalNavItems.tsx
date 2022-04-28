@@ -1,12 +1,12 @@
 import { Disclosure } from "@headlessui/react";
 import { FunctionComponent } from "react";
-import { NavItem } from "../../../CONSTANTS/navigation";
+import { NAV_ITEMS } from "../../../CONSTANTS/navigation";
 
-const VerticalNavItems: FunctionComponent<{ navigation: NavItem[] }> = ({ navigation }) => {
+const VerticalNavItems: FunctionComponent<{  }> = ({ }) => {
     return (
-        <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-blue-500">
-                {navigation.map(({ name, href }) => (
+        <Disclosure.Panel className="sm:hidden bg-blue-500 absolute rounded-lg w-full">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+                {NAV_ITEMS.map(({ name, href }) => (
                     <Disclosure.Button
                         key={name}
                         as="a"

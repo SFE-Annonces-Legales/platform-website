@@ -1,21 +1,18 @@
 import { FunctionComponent } from "react";
-import { NavItem } from "../../../CONSTANTS/navigation";
+import { NAV_ITEMS } from "../../../CONSTANTS/navigation";
+import NavItem from "./NavItem";
 
 
-const HorizontalNavItems: FunctionComponent<{ navigation: NavItem[] }> = ({ navigation }) => {
+const HorizontalNavItems: FunctionComponent<{containerStyles:string, itemStyles: string}> = ({ containerStyles, itemStyles }) => {
     return (
-        <div className="hidden sm:block sm:ml-6">
-            <div className="flex space-x-4">
-                {navigation.map(({ name, href }) => (
-                    <a
-                        key={name}
-                        href={href}
-                        className={`px-3 text-center flex items-center py-2 rounded-md text-sm font-medium hover:underline`}
-                    >
-                        {name}
-                    </a>
-                ))}
-            </div>
+        <div className={containerStyles}>
+            {NAV_ITEMS.map(({ name, href }) => (
+                <NavItem
+                    href={href}
+                    key={name}
+                    className={itemStyles}
+                >{name}</NavItem>
+            ))}
         </div>
     );
 }

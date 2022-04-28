@@ -1,5 +1,6 @@
-import { BsFacebook, BsTwitter, BsLinkedin, BsGoogle } from 'react-icons/bs'
-import { navigationItems } from '../../CONSTANTS/navigation';
+import { PLATFORM_NAME } from '../../CONSTANTS/navigation';
+import HorizontalNavItems from '../base/navigation/HorizontalNavItems';
+import SocialNetworkLinks from '../base/SocialNetworkLinks';
 
 const Footer = () => {
     return (
@@ -9,36 +10,15 @@ const Footer = () => {
                     <a href="https://flowbite.com" className="flex items-center mb-4 sm:mb-0">
                         <span className="self-center text-2xl font-semibold whitespace-nowrap">LOGO</span>
                     </a>
-                    <ul className="flex items-center sm:items-center mb-6 text-sm sm:mb-0">
-
-                        {
-                            navigationItems.map(({ name, href }) => (
-                                <li>
-                                    <a href={href} className="mr-4 hover:underline md:mr-6 ">{name}</a>
-                                </li>
-                            ))
-                        }
-
-                    </ul>
+                    <HorizontalNavItems
+                        containerStyles='flex items-center sm:items-center mb-6 text-sm sm:mb-0'
+                        itemStyles='mr-4 hover:underline md:mr-6'
+                    />
                 </div>
-                <div className="flex space-x-6 sm:justify-center sm:mt-0 mt-10 text-gray-400">
-                    <a href="#" className="hover:text-white">
-                        <BsFacebook />
-                    </a>
-                    <a href="#" className="hover:text-white">
-                        <BsLinkedin />
-                    </a>
-                    <a href="#" className="hover:text-white">
-                        <BsTwitter />
-                    </a>
-                    <a href="#" className="hover:text-white">
-                        <BsGoogle />
-                    </a>
-
-                </div>
+                <SocialNetworkLinks />
                 <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
                 <span className="block text-sm sm:text-center">&copy; 2022
-                    <a href="https://flowbite.com" className="hover:underline mx-2">Plateforme™.</a>
+                    <a href="https://flowbite.com" className="hover:underline mx-2">{PLATFORM_NAME}™.</a>
                 </span>
             </div>
         </footer>
