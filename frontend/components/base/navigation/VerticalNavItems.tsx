@@ -1,6 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { FunctionComponent } from "react";
-import { NAV_ITEMS } from "../../../CONSTANTS/navigation";
+import { NAV_ITEMS } from "../../../constants/navigation";
 
 const VerticalNavItems: FunctionComponent<{  }> = ({ }) => {
     return (

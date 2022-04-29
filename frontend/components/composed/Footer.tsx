@@ -1,4 +1,4 @@
-import { PLATFORM_NAME } from '../../CONSTANTS/navigation';
+import { PLATFORM_NAME } from '../../constants/navigation';
 import HorizontalNavItems from '../base/navigation/HorizontalNavItems';
 import SocialNetworkLinks from '../base/SocialNetworkLinks';
 

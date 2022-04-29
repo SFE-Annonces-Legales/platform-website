@@ -1,4 +1,4 @@
-import { PLATFORM_NAME } from "../../../../CONSTANTS/navigation";
+import { PLATFORM_NAME } from "../../../../constants/navigation";
 
 const AboutSection = () => {
     return (
