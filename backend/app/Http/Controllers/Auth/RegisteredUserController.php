@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Validator;
 
-
 class RegisteredUserController extends Controller
 {
     /**
@@ -31,34 +30,36 @@ class RegisteredUserController extends Controller
             'city' => ['required', 'string'],
             'phone' => ['required', 'string', "numeric"],
         ]);
-        // $validator = Validator::make($request->all(), [
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        //     'type' => ["required", "string"],
-        //     'city' => ['required', 'string'],
-        //     'phone' => ['required', 'string', "numeric"],
-        // ]);
-        // if($validator->fails()){
-        //     return response()->json(['errors' => $validator->messages(), "phone" => $request->phone]);
-        // } else {
-            $user = User::create([
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'type' => $request->type,
-                'phone' => $request->phone,
-                'city' => $request->city,
-                'civility' => $request->civility,
-                'fullname' => $request->fullname,
-                'company' => $request->company,
-                'ice' => $request->ice,
-            ]);
-    
-            event(new Registered($user));
-    
-            Auth::login($user);
-    
-            return response()->noContent();
 
-        //}
+        if($request->type === "pro"){
+            $request->validate([
+                'company' => ['required', 'max:255'],
+                'ice' => ['required', 'numeric']
+            ]);
+        } else {
+            $request->validate([
+                'fullname' => ['required', 'max:255', 'min:5'],
+                'civility' => ['required', 'alpha']
+            ]);
+        }
+
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type' => strtolower($request->type),
+            'phone' => "0".$request->phone,
+            'city' => strtolower($request->city),
+            'civility' => $request->civility,
+            'fullname' => strtolower($request->fullname),
+            'company' => strtolower($request->company),
+            'ice' => $request->ice,
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return response()->noContent();
+
     }
 }

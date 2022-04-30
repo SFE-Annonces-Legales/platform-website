@@ -5,9 +5,7 @@ import RegisterPage from "../components/pages/RegisterPage";
 
 const Register: NextPage = () => {
     return (
-        <MainLayout>
-            <RegisterPage />
-        </MainLayout>
+        <RegisterPage />
     );
 }
 export default Register;

@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import Footer from "../composed/Footer";
 import AboutSection from "../composed/home/sections/AboutSection";
 import HeroSection from "../composed/home/sections/HeroSection";
@@ -9,9 +10,9 @@ import MainLayout from "../layouts/MainLayout";
 interface HomePageProps { }
 
 const HomePage: FunctionComponent<HomePageProps> = () => {
-
+    const { } = useAuth({ middleware: 'guest' })
     return (
-        <MainLayout>
+        <>
             <main id="hero">
                 <HeroSection />
                 <div className="px-2 sm:px-6 lg:px-8 pt-10 pb-20" id="about">
@@ -23,7 +24,7 @@ const HomePage: FunctionComponent<HomePageProps> = () => {
                 </div>
             </main>
             <Footer />
-        </MainLayout>
+        </>
     );
 }
 

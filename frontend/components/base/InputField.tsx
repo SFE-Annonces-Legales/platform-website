@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, FieldHookConfig, useField } from "formik";
 import { PropsWithChildren } from "react";
+import FormError from "./FormError";
 
 type InputFieldProps = PropsWithChildren<{ label: string; }>
 
@@ -14,8 +15,7 @@ const InputField: React.FC<FieldHookConfig<string> & InputFieldProps> = ({ label
                 >
                     { label }
                 </label>
-                
-                <ErrorMessage name={props.name} component="p" className="inline text-red-600 ml-2" />
+                <FormError name={props.name}  />
             </div>
 
             <Field 

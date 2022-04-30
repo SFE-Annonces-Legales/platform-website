@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import MainLayout from "../components/layouts/MainLayout";
 import { useAuth } from "../hooks/useAuth";
 
 const Index: NextPage = () => {
@@ -7,5 +8,6 @@ const Index: NextPage = () => {
         <h1>{user?.email}</h1>
     );
 }
+
 
 export default Index;

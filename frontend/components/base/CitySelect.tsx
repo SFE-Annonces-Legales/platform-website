@@ -1,15 +1,16 @@
-import { ErrorMessage, Field, FieldHookConfig, useField } from "formik";
-import { ChangeEvent, FC } from "react";
+import { Field, FieldHookConfig, useField } from "formik";
+import { FC } from "react";
+import FormError from "./FormError";
 
 type CitySelectProps = string | FieldHookConfig<any>;
 
 const CitySelect: FC<CitySelectProps> = (props) => {
-    const [field, meta, helpers] = useField(props);
+    const [ field ] = useField(props);
     return (
         <div className="mb-6">
             <>
                 <label className="mb-2 text-sm font-medium text-gray-900">Ville</label>
-                <ErrorMessage name='city' component="p" className="inline text-red-600 ml-2" />
+                <FormError name='city' />
             </>
             <Field as="select"
                 {...field}
