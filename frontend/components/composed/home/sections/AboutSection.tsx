@@ -1,4 +1,7 @@
-import { PLATFORM_NAME } from "../../../../constants/navigation";
+import { PLATFORM_NAME } from "@/constants/navigation";
+import { BiPencil } from 'react-icons/bi'
+import HyperLink from "@/components/base/HyperLink";
+
 
 const AboutSection = () => {
     return (
@@ -11,9 +14,11 @@ const AboutSection = () => {
                     Le journal {PLATFORM_NAME} est un service spécialisé dans l'information légale, juridique et financière.
                     Il permet aux sociétés et professionnels du chiffre et du droit de publier rapidement et aux meilleurs tarifs leur annonces légales dans le journal quotidien numérique.
                 </p>
-                <button className="btn-white-primary my-2 sm:my-6 px-10">
+                <HyperLink href="/" className="btn-white-primary my-2 sm:my-6 px-10">
+                    
+                    <BiPencil className="inline mr-2" />
                     Rédiger
-                </button>
+                </HyperLink>
             </div>
             );
 }

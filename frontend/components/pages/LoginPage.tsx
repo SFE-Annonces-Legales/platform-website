@@ -1,12 +1,25 @@
 import { Field, Form, Formik } from 'formik';
-import Link from 'next/link';
-import { useAuth } from '../../hooks/useAuth';
-import loginValidator from '../../validators/login-validator';
-import FormButton from '../base/FormButton';
-import InputField from '../base/InputField';
+import { useAuth } from '@/hooks/useAuth';
+import loginValidator from '@/validators/login-validator';
+import FormButton from '@/components/base/Forms/FormButton';
+import InputField from '@/components/base/Forms/InputField';
+import HyperLink from '@/components/base/HyperLink';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const LoginPage = () => {
+    const router = useRouter()
+    const [status, setStatus] = useState<string|null>(null)
+    // const [err, setErr] = useState([])
     const { login } = useAuth({ middleware: "guest", redirectIfAuthenticated: '/' });
+
+    useEffect(() => {
+        if ((router.query.reset as string)?.length > 0) {
+            setStatus(Buffer.from((router.query.reset as string), 'base64').toString('binary'))
+        } else {
+            setStatus(null)
+        }
+    })
     return (
         <div
             className="flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8 bg-gray-300"
@@ -22,7 +35,7 @@ const LoginPage = () => {
                     validationSchema={loginValidator}
                     onSubmit={(values, { setErrors, setSubmitting }) => {
                         try {
-                            login(setErrors, values);
+                            login(setErrors, setStatus, values);
                         } catch (err: any) {
                             console.error(err)
                         }
@@ -46,11 +59,9 @@ const LoginPage = () => {
                                 </div>
 
                                 <div className="text-sm">
-                                    <Link href="#">
-                                        <a className="font-medium text-blue-600 hover:text-blue-800">
-                                            Mot de passe oublié ?
-                                        </a>
-                                    </Link>
+                                    <HyperLink href='/forgot-password' className='font-medium text-blue-600 hover:text-blue-800'>
+                                        Mot de passe oublié ?
+                                    </HyperLink>
                                 </div>
                             </div>
                             <FormButton
@@ -65,9 +76,7 @@ const LoginPage = () => {
                 <hr className="my-2 border-gray-200 sm:mx-auto lg:my-6 max-w-3xl" />
                 <div className='flex flex-col justify-center items-center text-sm'>
                     <p className='text-gray-500'>Pas encore de compte chez nous ? </p>
-                    <Link href='/register'>
-                        <a className='text-blue-800 font-bold hover:underline'>Inscrivez-vous gratuitement.</a>
-                    </Link>
+                    <HyperLink href='/register' className='text-blue-800 font-bold hover:underline'>Inscrivez-vous gratuitement.</HyperLink>
                 </div>
             </div>
         </div>

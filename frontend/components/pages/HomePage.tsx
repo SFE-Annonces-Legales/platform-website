@@ -1,11 +1,10 @@
 import { FunctionComponent } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import Footer from "../composed/Footer";
-import AboutSection from "../composed/home/sections/AboutSection";
-import HeroSection from "../composed/home/sections/HeroSection";
-import PricingSection from "../composed/home/sections/PricingSection";
-import StepsSection from "../composed/home/sections/StepsSection";
-import MainLayout from "../layouts/MainLayout";
+import { useAuth } from "@/hooks/useAuth";
+import Footer from "@/components/composed/Footer";
+import AboutSection from "@/components/composed/home/sections/AboutSection";
+import HeroSection from "@/components/composed/home/sections/HeroSection";
+import PricingSection from "@/components/composed/home/sections/PricingSection";
+import StepsSection from "@/components/composed/home/sections/StepsSection";
 
 interface HomePageProps { }
 

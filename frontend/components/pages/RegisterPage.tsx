@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import CitySelect from '../base/CitySelect';
+import CitySelect from '@/components/base/Forms/CitySelect';
 import { Field, Form, Formik } from "formik";
-import registerValidator from '../../validators/register-validator';
-import InputField from '../base/InputField';
-import { useAuth } from '../../hooks/useAuth';
-import FormError from '../base/FormError';
-import FormButton from '../base/FormButton';
+import registerValidator from '@/validators/register-validator';
+import InputField from '@/components/base/Forms/InputField';
+import { useAuth } from '@/hooks/useAuth';
+import FormError from '@/components/base/Forms/FormError';
+import FormButton from '@/components/base/Forms/FormButton';
+import HyperLink from '@/components/base/HyperLink';
 
 const INITIAL_USER = {
     acceptedTerms: false,
@@ -113,10 +113,11 @@ const RegisterPage = () => {
                                 <div className="flex items-center h-5">
                                     <Field id="terms" type="checkbox" name='acceptedTerms' className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" />
                                 </div>
-                                <label htmlFor="terms" className="ml-2 text-sm font-medium text-gray-900 ">J'ai lu et j'accepte les
-                                    <Link href="/">
-                                        <a className="text-blue-600 hover:underline ">{' '}conditions générales d'utilisation .</a>
-                                    </Link>
+                                <label htmlFor="terms" className="ml-2 text-sm font-medium text-gray-900 ">
+                                    J'ai lu et j'accepte les
+                                    <HyperLink href="/" className="text-blue-600 hover:underline ">
+                                        {' '}conditions générales d'utilisation .
+                                    </HyperLink>
                                 </label>
                             </div>
 

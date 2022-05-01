@@ -1,4 +1,4 @@
-import PricingCard from "../PricingCard";
+import PricingCard from "@/components/composed/home/PricingCard";
 
 
 const PricingSection = () => {

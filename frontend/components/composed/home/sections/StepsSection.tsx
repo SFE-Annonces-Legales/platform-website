@@ -1,4 +1,4 @@
-import TextWithImage from "../TextWithImage";
+import TextWithImage from "@/components/composed/home/TextWithImage";
 
 
 const StepsSection = () => {

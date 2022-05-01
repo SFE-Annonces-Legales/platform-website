@@ -29,19 +29,11 @@ class RegisteredUserController extends Controller
             'type' => ["required", "string"],
             'city' => ['required', 'string'],
             'phone' => ['required', 'string', "numeric"],
+            'company' => ['exclude_if:type,particulier', 'required', 'max:255'],
+            'ice' => ['exclude_if:type,particulier', 'required', 'numeric', 'unique:users'],
+            'fullname' => ['exclude_if:type,pro', 'required', "between:5,50"],
+            'civility' => ['exclude_if:type,pro', 'required', 'alpha']
         ]);
-
-        if($request->type === "pro"){
-            $request->validate([
-                'company' => ['required', 'max:255'],
-                'ice' => ['required', 'numeric']
-            ]);
-        } else {
-            $request->validate([
-                'fullname' => ['required', 'max:255', 'min:5'],
-                'civility' => ['required', 'alpha']
-            ]);
-        }
 
         $user = User::create([
             'email' => $request->email,

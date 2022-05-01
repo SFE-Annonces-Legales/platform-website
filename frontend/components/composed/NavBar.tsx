@@ -1,11 +1,11 @@
 import { Disclosure } from '@headlessui/react'
-import { useAuth } from '../../hooks/useAuth';
-import HorizontalNavItems from '../base/navigation/HorizontalNavItems';
-import Logo from '../base/navigation/Logo';
-import MobileMenuButton from '../base/navigation/MobileMenuButton';
-import NavAuthLinks from '../base/navigation/NavAuthLinks';
-import UserMenu from '../base/navigation/UserMenu';
-import VerticalNavItems from '../base/navigation/VerticalNavItems';
+import { useAuth } from '@/hooks/useAuth';
+import HorizontalNavItems from '@/components/base/navigation/HorizontalNavItems';
+import Logo from '@/components/base/navigation/Logo';
+import MobileMenuButton from '@/components/base/navigation/MobileMenuButton';
+import NavAuthLinks from '@/components/base/navigation/NavAuthLinks';
+import UserMenu from '@/components/base/navigation/UserMenu';
+import VerticalNavItems from '@/components/base/navigation/VerticalNavItems';
 
 
 const Navbar = () => {

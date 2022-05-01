@@ -1,3 +1,4 @@
+import HyperLink from "@/components/base/HyperLink";
 
 
 const HeroSection = () => {
@@ -10,9 +11,9 @@ const HeroSection = () => {
                 <p className="my-6 sm:py-3 sm:text-2xl text-lg font-medium text-blue-300 max-w-xl">
                     Créer et publier une annonce légale facilement et rapidement avec nos modèles prêts à utiliser.
                 </p>
-                <button className="btn-white-primary my-2 sm:my-6">
+                <HyperLink href='/' className="btn-white-primary my-2 sm:my-6">
                     Commencer maintenant
-                </button>
+                </HyperLink>
             </div>
         </div>
     );

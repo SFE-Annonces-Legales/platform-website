@@ -1,10 +1,11 @@
+import HyperLink from "../HyperLink";
 
 
 const Logo = () => {
     return (
-        <div className="flex ml-2">
+        <HyperLink href='/home' className="flex ml-2">
             <h1 className="block text-2xl w-auto font-bold">LOGO</h1>
-        </div>
+        </HyperLink>
     );
 }
 export default Logo;

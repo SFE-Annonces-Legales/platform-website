@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import http from '../helpers/http'
-import { useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { RegisterUser, RegisterUserErrors } from '../interfaces/registerUser';
 import { LoginUserErrors } from '../interfaces/loginUser';
@@ -39,10 +39,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {
         }
     }
 
-    const login = async (setErrors: LoginUserErrors, values: {email: string, password: string, remember: boolean} ) => {
+    const login = async (setErrors: LoginUserErrors, setStatus: any, values: {email: string, password: string, remember: boolean} ) => {
         await csrf()
-        // setErrors([])
-        // setStatus(null)
+        setStatus(null)
         try {
             await http.post('/login', values);
             mutate();
@@ -52,34 +51,34 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {
         }
     }
 
-    const forgotPassword = async ( setErrors: any, email: string) => {
+    const forgotPassword = async ( setErrors: any, setStatus: Dispatch<SetStateAction<string | null>>, email: string) => {
         await csrf()
 
         setErrors([])
-        // setStatus(null)
+        setStatus(null)
         try {
             const {data} = await http.post('/forgot-password', { email });
-            // setStatus(data.status)
+            setStatus(data.status)
         } catch (err: any) {
             if (err.response.status !== 422) throw err
             setErrors(Object.values(err.response.data.errors).flat())
         }
     }
 
-    const resetPassword = async ( setErrors: any, setStatus: any, values: any ) => {
+    const resetPassword = async ( setErrors: any, setStatus: Dispatch<SetStateAction<string | null>>, values: any ) => {
         await csrf()
         setErrors([])
         setStatus(null)
         try {
             const { data } = await http.post('/reset-password', { token: router.query.token, ...values });
-             router.push('/login?reset=' + Buffer.from(data.status, "base64"));
+             router.push('/login?reset=' + Buffer.from(data.status, "binary").toString("base64"));
         } catch (err: any) {
             if (err.response.status != 422) throw err;
             setErrors(err.response.data.errors)   
         }
     }
 
-    const resendEmailVerification = async ({ setStatus }: {setStatus: any}) => {
+    const resendEmailVerification = async ({ setStatus }: {setStatus: Dispatch<SetStateAction<string | null>>}) => {
         try {
             const { data } = await http.post('/email/verification-notification')
             setStatus(data.status);

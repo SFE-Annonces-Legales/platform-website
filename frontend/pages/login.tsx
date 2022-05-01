@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import LoginPage from "../components/pages/LoginPage";
+import LoginPage from "@/components/pages/LoginPage";
 
 const Login: NextPage = () => {
     return (

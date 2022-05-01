@@ -1,6 +1,6 @@
-import { PLATFORM_NAME } from '../../constants/navigation';
-import HorizontalNavItems from '../base/navigation/HorizontalNavItems';
-import SocialNetworkLinks from '../base/SocialNetworkLinks';
+import { PLATFORM_NAME } from '@/constants/navigation';
+import HorizontalNavItems from '@/components/base/navigation/HorizontalNavItems';
+import SocialNetworkLinks from '@/components/base/SocialNetworkLinks';
 
 const Footer = () => {
     return (

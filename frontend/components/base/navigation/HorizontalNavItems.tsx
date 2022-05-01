@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { NAV_ITEMS } from "../../../constants/navigation";
+import { NAV_ITEMS } from "@/constants/navigation";
 import NavItem from "./NavItem";
 
 
