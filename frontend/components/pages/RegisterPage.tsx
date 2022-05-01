@@ -22,7 +22,7 @@ const INITIAL_USER = {
 }
 
 const RegisterPage = () => {
-    const { register } = useAuth({ middleware: 'guest', redirectIfAuthenticated: '/' })
+    const { register } = useAuth({ middleware: 'guest', redirectIfAuthenticated: '/verify-email' })
     return (
         <div className="flex items-center justify-center bg-gray-300 w-auto" style={{ minHeight: "calc(100vh - 4rem)" }}>
 

@@ -16,10 +16,10 @@ const EmailVerification = () => {
         <div className="bg-gray-300 flex justify-center items-center" style={{ minHeight: "calc(100vh - 4rem)" }}>
 
             <Formik
-                initialValues={{ email: '' }}
-                validationSchema={resetPasswordValidator}
-                onSubmit={(values, { setSubmitting, setErrors }) => {
+                initialValues={{}}
+                onSubmit={(_, { setSubmitting, setErrors }) => {
                     resendEmailVerification({ setStatus });
+                    setSubmitting(false);
                 }}
             >
                 {({ isSubmitting }) => (
@@ -33,10 +33,9 @@ const EmailVerification = () => {
                             Si vous n'avez pas reçu l'e-mail, nous vous en enverrons un autre avec plaisir.
                         </p>
                         {status === 'verification-link-sent' && (
-                            <div className="mb-4 font-medium text-sm text-green-600">
-                                A new verification link has been sent to the email
-                                address you provided during registration.
-                            </div>
+                            <p className="mb-4 font-medium text-sm text-green-600">
+                                Un nouveau lien de vérification a été envoyé à l'adresse e-mail que vous avez fournie lors de l'inscription.
+                            </p>
                         )}
                         <FormButton
                             className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
