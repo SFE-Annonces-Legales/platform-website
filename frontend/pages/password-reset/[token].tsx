@@ -2,6 +2,7 @@ import FormButton from "@/components/base/Forms/FormButton";
 import InputField from "@/components/base/Forms/InputField";
 import Logo from "@/components/base/navigation/Logo";
 import { useAuth } from "@/hooks/useAuth";
+import passwordResetValidator from "@/validators/passwordResetValidator";
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -17,9 +18,10 @@ const ResetPasswordForm = () => {
         <div className="bg-gray-300 flex justify-center items-center" style={{ minHeight: "calc(100vh - 4rem)" }}>
 
             <Formik
-                initialValues={{email: "", password: "", password_confirmation: ""}}
+                initialValues={{email: router.query.email as string ?? "", password: "", password_confirmation: ""}}
+                validationSchema={passwordResetValidator}
                 onSubmit={(values, { setSubmitting, setErrors }) => {
-                    resetPassword(setErrors, setStatus, values);
+                    resetPassword({ setErrors, setStatus, values });
                     setSubmitting(false);
                 }}
             >
@@ -28,6 +30,7 @@ const ResetPasswordForm = () => {
                         <div className="flex justify-center my-4">
                             <Logo />
                         </div>
+                        {status && <p className="text-sm text-green-600">{status}</p>}
                         <InputField
                             name="email"
                             type={"email"}

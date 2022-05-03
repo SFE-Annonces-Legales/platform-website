@@ -2,7 +2,6 @@ import FormButton from "@/components/base/Forms/FormButton";
 import InputField from "@/components/base/Forms/InputField";
 import Logo from "@/components/base/navigation/Logo";
 import { useAuth } from "@/hooks/useAuth";
-import resetPasswordValidator from "@/validators/reset-password-validator";
 import { Formik, Form } from "formik";
 import { useState } from "react";
 
@@ -17,7 +16,7 @@ const EmailVerification = () => {
 
             <Formik
                 initialValues={{}}
-                onSubmit={(_, { setSubmitting, setErrors }) => {
+                onSubmit={(_, { setSubmitting }) => {
                     resendEmailVerification({ setStatus });
                     setSubmitting(false);
                 }}
@@ -37,14 +36,17 @@ const EmailVerification = () => {
                                 Un nouveau lien de vérification a été envoyé à l'adresse e-mail que vous avez fournie lors de l'inscription.
                             </p>
                         )}
-                        <FormButton
-                            className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
-                            isSubmitting={isSubmitting}>
-                            envoyer un autre email 
-                        </FormButton>
-                        <button className="underline text-sm text-gray-600 hover:text-gray-900 mx-4" type="button" onClick={logout}>
-                            Se déconnecter
-                        </button>
+                        <div className="flex justify-between">
+                            <FormButton
+                                className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+                                isSubmitting={isSubmitting}>
+                                envoyer un autre email 
+                            </FormButton>
+                            <button className="underline text-sm text-gray-600 hover:text-gray-900" type="button" onClick={logout}>
+                                Se déconnecter
+                            </button>
+
+                        </div>
                     </Form>
                 )}
             </Formik>

@@ -36,7 +36,7 @@ const RegisterPage = () => {
                     validationSchema={registerValidator}
                     onSubmit={async (values, { setErrors, setSubmitting }) => {
                         try {
-                            register(setErrors, values);
+                            register({ setErrors, values });
                         } catch (err) {
                             console.log(err)
                         }

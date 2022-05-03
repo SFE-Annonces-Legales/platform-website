@@ -10,9 +10,7 @@ import { useRouter } from 'next/router';
 const LoginPage = () => {
     const router = useRouter()
     const [status, setStatus] = useState<string|null>(null)
-    // const [err, setErr] = useState([])
     const { login } = useAuth({ middleware: "guest", redirectIfAuthenticated: '/' });
-
     useEffect(() => {
         if ((router.query.reset as string)?.length > 0) {
             setStatus(Buffer.from((router.query.reset as string), 'base64').toString('binary'))
@@ -35,7 +33,7 @@ const LoginPage = () => {
                     validationSchema={loginValidator}
                     onSubmit={(values, { setErrors, setSubmitting }) => {
                         try {
-                            login(setErrors, setStatus, values);
+                            login({ setErrors, setStatus, values });
                         } catch (err: any) {
                             console.error(err)
                         }
@@ -43,6 +41,7 @@ const LoginPage = () => {
                     }} >
                     {({ isSubmitting }) => (
                         <Form className="mt-8 space-y-6">
+                            {status && <p className='text-sm text-green-600'>{status}</p>}
                             <InputField label='Email' name='email' placeholder='test@mail.com' />
                             <InputField label='Mot de passe' name='password' placeholder='•••••••••' type='password' />
                             <div className="flex items-center justify-between">
