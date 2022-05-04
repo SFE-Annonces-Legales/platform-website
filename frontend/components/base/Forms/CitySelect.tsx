@@ -5,7 +5,7 @@ import FormError from "./FormError";
 type CitySelectProps = string | FieldHookConfig<any>;
 
 const CitySelect: FC<CitySelectProps> = (props) => {
-    const [ field ] = useField(props);
+    const [ field, meta ] = useField(props);
     return (
         <div className="mb-6">
             <>
@@ -15,7 +15,7 @@ const CitySelect: FC<CitySelectProps> = (props) => {
             <Field as="select"
                 {...field}
                 {...props}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                className={`${meta.error && 'border-red-600'} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}>
                 <option defaultValue="" value={""}>-- choisir --</option>
                 <option value="Agadir">Agadir</option>
                 <option value="Al Hoceima">Al Hoceima</option>

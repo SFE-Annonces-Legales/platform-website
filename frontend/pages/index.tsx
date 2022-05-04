@@ -1,10 +1,13 @@
 import { NextPage } from "next";
 import { useAuth } from "@/hooks/useAuth";
+import UserLayout from "@/components/layouts/UserLayout";
 
 const Index: NextPage = () => {
-    const {logout, user} = useAuth({ middleware: "auth" });
+    const { logout, user } = useAuth({ middleware: "auth" });
     return (
-        <h1>{user?.email}</h1>
+        <UserLayout>
+            <h1>{user?.fullname}</h1>
+        </UserLayout>
     );
 }
 
