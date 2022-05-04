@@ -28,6 +28,5 @@ class UpdateUsersPhoneColumn extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->bigInteger('phone')->change();
         });
-    
     }
 }

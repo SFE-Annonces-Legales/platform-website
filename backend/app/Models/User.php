@@ -26,7 +26,8 @@ class User extends Authenticatable
         'company',
         'ice',
         'phone',
-        'type'
+        'type',
+        'role_id'
     ];
 
     /**

@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
             'fullname' => strtolower($request->fullname),
             'company' => strtolower($request->company),
             'ice' => $request->ice,
+            'role_id' => 1920,
         ]);
 
         event(new Registered($user));
