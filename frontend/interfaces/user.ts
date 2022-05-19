@@ -7,4 +7,10 @@ export default interface User {
     civility: string;
     company: string;
     ice: string;
+    role: Role
+}
+
+export interface Role {
+    id: number;
+    role_name: 'editor'|'user'|'admin';
 }

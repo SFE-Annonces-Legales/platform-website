@@ -15,7 +15,6 @@ const AboutSection = () => {
                     Il permet aux sociétés et professionnels du chiffre et du droit de publier rapidement et aux meilleurs tarifs leur annonces légales dans le journal quotidien numérique.
                 </p>
                 <HyperLink href="/" className="btn-white-primary my-2 sm:my-6 px-10">
-                    
                     <BiPencil className="inline mr-2" />
                     Rédiger
                 </HyperLink>

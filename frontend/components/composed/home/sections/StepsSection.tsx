@@ -7,7 +7,7 @@ const StepsSection = () => {
 
             <TextWithImage
                 title="Choisissez le modèle le mieux adapté à votre parution."
-                src="https://via.placeholder.com/300"
+                src="/illustrations/time_save.jpg"
                 reversed={false}
             >
                 Constitution, modification, cessation ou autre, nos mdèles prédefinis sont à votre
@@ -16,7 +16,7 @@ const StepsSection = () => {
 
             <TextWithImage
                 title="Remplissez le formulaire."
-                src="https://via.placeholder.com/300"
+                src="/illustrations/fill_form.jpg"
                 reversed
             >
                 Donner les informations nécessaires pour la création de votre annonce légale.
@@ -25,7 +25,7 @@ const StepsSection = () => {
 
             <TextWithImage
                 title="Procèdez au paiment."
-                src="https://via.placeholder.com/300"
+                src="/illustrations/pay.jpg"
                 reversed={false}
             >
                 Selectionner la forme de paiment qui vous convient,

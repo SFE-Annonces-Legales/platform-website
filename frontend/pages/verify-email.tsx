@@ -13,7 +13,7 @@ const EmailVerification = () => {
     const [status, setStatus] = useState<string | null>(null);
     return (
         <UserLayout>
-            <div className="bg-gray-300 flex justify-center items-center" style={{ minHeight: "calc(100vh - 4rem)" }}>
+            <div className="bg-gray-300 flex justify-center items-center my-4" style={{ minHeight: "calc(100vh - 4rem)" }}>
 
                 <Formik
                     initialValues={{}}

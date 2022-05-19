@@ -4,7 +4,8 @@ import SocialNetworkLinks from '@/components/base/SocialNetworkLinks';
 
 const Footer = () => {
     return (
-        <footer className="p-4 bg-gradient-to-b from-blue-600 to-blue-900 shadow md:px-6 md:py-8 text-white">
+        <footer 
+            className="p-4 bg-gradient-to-b from-blue-600 to-blue-900 shadow md:px-6 md:py-8 text-white w-full">
             <div className="max-w-7xl mx-auto">
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <a href="https://flowbite.com" className="flex items-center mb-4 sm:mb-0">

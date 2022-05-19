@@ -29,7 +29,7 @@ const Login = () => {
                     <Formik
                         initialValues={{ email: "", password: "", remember: false }}
                         validationSchema={loginValidator}
-                        onSubmit={(values, { setErrors, setSubmitting }) => {
+                        onSubmit={async(values, { setErrors, setSubmitting }) => {
                             try {
                                 login({ setErrors, setStatus, values });
                             } catch (err: any) {

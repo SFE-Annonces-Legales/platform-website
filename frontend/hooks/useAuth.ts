@@ -1,4 +1,4 @@
-import useSWR, { Fetcher, Key } from 'swr'
+import useSWR from 'swr'
 import http from '../helpers/http'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -9,6 +9,7 @@ import User from '@/interfaces/user'
 interface UseAuthArgs {
     middleware?: 'auth' | 'guest';
     redirectIfAuthenticated?: string;
+    role?: string;
 }
 
 interface Params<T>{
@@ -18,10 +19,10 @@ interface Params<T>{
 }
 
 
-export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {}) => {
+export const useAuth = ({ middleware, redirectIfAuthenticated, role = "user" }: UseAuthArgs = {}) => {
     const router = useRouter()
     const { data: user, error, mutate } = useSWR<User>('/api/user', async () =>{
-        try{
+        try {
             const { data } = await http.get('/api/user');
             return data;
         } catch(err: any){
@@ -29,7 +30,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {
             router.push('/verify-email');
         }
     })
-
+    
     const csrf = () => http.get('/sanctum/csrf-cookie');
 
     const register = async ({ setErrors, values }: Params<RegisterUser>)=> {
@@ -44,7 +45,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {
         }
     }
 
-    const login = async ({setErrors, setStatus, values}: Params<{email: string, password: string, remember: boolean}> ) => {
+    const login = async ({ setErrors, setStatus, values }: Params<{email: string, password: string, remember: boolean}> ) => {
         await csrf()
         setStatus!(null)
         try {
@@ -56,7 +57,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {
         }
     }
 
-    const forgotPassword = async ({setErrors, setStatus, values}: Params<{ email: string }>) => {
+    const forgotPassword = async ({ setErrors, setStatus, values }: Params<{ email: string }>) => {
         await csrf()
         setErrors({})
         setStatus!(null)
@@ -69,7 +70,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {
         }
     }
 
-    const resetPassword = async ({setErrors, setStatus, values}: Params<{email: string, password: string, password_confirmation: string}>) => {
+    const resetPassword = async (
+        { setErrors, setStatus, values }: 
+        Params<{email: string, password: string, password_confirmation: string}>
+        ) => {
         await csrf()
         setErrors({})
         setStatus!(null)
@@ -102,8 +106,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthArgs = {
     }
 
     useEffect(() => {
-        if (middleware === 'guest' && redirectIfAuthenticated && user) router.push(redirectIfAuthenticated)
-        if (middleware === 'auth' && error) logout()
+        if (middleware === 'guest' && redirectIfAuthenticated && user) router.push(redirectIfAuthenticated);
+        if (middleware === 'auth' && user && user.role.role_name !== role) router.back();
+        if (middleware === 'auth' && error) logout();
     }, [user, error])
 
     return {

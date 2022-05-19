@@ -7,7 +7,6 @@ import title from "@/helpers/title";
 import { BiLogOut } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 
-
 const UserMenu = () => {
     const router = useRouter()
     const { user, logout } = useAuth({ middleware: "auth" });
@@ -31,7 +30,7 @@ const UserMenu = () => {
                     className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                         <p className={`block px-4 py-2 text-sm text-gray-900`}>
-                            {user.type === 'pro' ? user.company : title(`${user.civility}. ${user.fullname}`)}
+                            {user!.type === 'pro' ? title(user!.company) : title(`${user!.civility}. ${user!.fullname}`)}
                         </p>
                     </Menu.Item>
                     <hr className="bg-gray-700 mb-1" />
