@@ -4,12 +4,12 @@ import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { RegisterUser } from '../interfaces/registerUser';
 import { FormikErrors } from 'formik';
-import User from '@/interfaces/user'
+import User, { Role } from '@/interfaces/user'
 
 interface UseAuthArgs {
     middleware?: 'auth' | 'guest';
     redirectIfAuthenticated?: string;
-    role?: string;
+    role?: Role['role_name'];
 }
 
 interface Params<T>{

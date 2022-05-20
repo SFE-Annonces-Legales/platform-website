@@ -1,12 +1,14 @@
 import { NextPage } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
 import UserLayout from "@/components/layouts/UserLayout";
 import { PUB_LIST } from '@/constants/pub-list'
-import Link from "next/link";
 import { PLATFORM_NAME } from "@/constants/navigation";
 
+
 const Index: NextPage = () => {
-    const { logout, user } = useAuth({ middleware: "auth" });
+    const { } = useAuth({ middleware: "auth" });
     return (
         <UserLayout>
             <div className="min-h-screen w-full my-0 bg-gray-200 pb-4">
@@ -46,7 +48,10 @@ const Index: NextPage = () => {
                                     <ul className="p-8 list-inside bg-white rounded-b-lg">
                                         {items.map((item, index) => (
                                             <li className="list-disc py-1" key={index}>
-                                                <Link href={`${url}/${item.url}`}>
+                                                <Link href={{
+                                                    pathname: '/[section]/[template]',
+                                                    query: { section: url, template: item.url }
+                                                }}>
                                                     <a className="hover:font-semibold hover:text-blue-600">{item.name}</a>
                                                 </Link>
                                             </li>
@@ -56,11 +61,22 @@ const Index: NextPage = () => {
                             ))
                         }
                     </div>
+
+                    <div className="flex flex-col items-center mx-auto my-4 bg-white rounded-lg border shadow-md md:flex-row md:max-w-5xl">
+                        <Image
+                            src="/illustrations/free_mode.jpg"
+                            width={500} height={400}
+                            className="w-full h-9 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                        />
+                        <div className="flex flex-col justify-between p-4 leading-normal">
+                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-blue-900">Noteworthy technology acquisitions 2021</h5>
+                            <p className="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </UserLayout>
     );
 }
-
 
 export default Index;
