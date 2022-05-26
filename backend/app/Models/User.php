@@ -21,7 +21,7 @@ class User extends Authenticatable
         'fullname',
         'email',
         'password',
-        'city',
+        'city_id',
         'civility',
         'company',
         'ice',
@@ -39,6 +39,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'role_id',
+        'city_id',
     ];
 
     /**
@@ -58,5 +59,9 @@ class User extends Authenticatable
     public function hasRole(string $role)
     {
         return $this->role()->role_name === $role;
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class, 'city_id');
     }
 }

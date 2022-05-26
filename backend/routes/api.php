@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return User::with('role')->find($request->user()->id);
+    return User::with(['role', 'city'])->find($request->user()->id);
+});
+Route::get('/cities', function (Request $request) {
+    return DB::table('cities')->orderBy("name")->get();
+});
+Route::get('/courts', function (Request $request) {
+    return DB::table('courts')->orderBy("name")->get();
 });

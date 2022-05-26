@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum("civility", [null, "m", "mme", "mlle"])->nullable();
             $table->bigInteger('phone');
-            $table->string("city");
             $table->string("company")->nullable();
             $table->bigInteger("ice")->nullable();
             $table->enum("type", ["pro", "particulier"]);
