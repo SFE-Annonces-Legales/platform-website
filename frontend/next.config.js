@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // images: {
-  //   domains: ['assets.vercel.com'],
-  //   formats: ['image/avif', 'image/webp'],
-  // },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
 }
 
 module.exports = nextConfig

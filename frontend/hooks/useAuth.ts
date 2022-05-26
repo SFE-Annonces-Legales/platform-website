@@ -1,10 +1,11 @@
 import useSWR from 'swr'
-import http from '../helpers/http'
+import http from '@/helpers/http'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { RegisterUser } from '../interfaces/registerUser';
+import { RegisterUser } from '@/interfaces/registerUser';
 import { FormikErrors } from 'formik';
 import User, { Role } from '@/interfaces/user'
+import csrf from '@/helpers/csrf';
 
 interface UseAuthArgs {
     middleware?: 'auth' | 'guest';
@@ -18,7 +19,6 @@ interface Params<T>{
     values: T;
 }
 
-
 export const useAuth = ({ middleware, redirectIfAuthenticated, role = "user" }: UseAuthArgs = {}) => {
     const router = useRouter()
     const { data: user, error, mutate } = useSWR<User>('/api/user', async () =>{
@@ -30,8 +30,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated, role = "user" }: 
             router.push('/verify-email');
         }
     })
-    
-    const csrf = () => http.get('/sanctum/csrf-cookie');
 
     const register = async ({ setErrors, values }: Params<RegisterUser>)=> {
         await csrf()

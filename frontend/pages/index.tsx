@@ -1,10 +1,11 @@
 import { NextPage } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
 import UserLayout from "@/components/layouts/UserLayout";
 import { PUB_LIST } from '@/constants/pub-list'
 import { PLATFORM_NAME } from "@/constants/navigation";
+import HyperLink from "@/components/base/HyperLink";
+import Illustration from '@/public/illustrations/freeMode.jpg'
 
 
 const Index: NextPage = () => {
@@ -22,7 +23,7 @@ const Index: NextPage = () => {
                         Le prix unitaire de l'annonce est de 150 DH TTC. Découvrez aussi nos différents packs de recharges et bénéficiez de tarifs avantageux.
                     </div>
                 </div>
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl mx-auto px-4">
                     {/* Welcoming Text */}
                     <div className="sm:max-w-4xl max-w-sm mx-auto py-2 text-center">
                         <h3 className="sm:text-4xl text-lg text-blue-900 mt-6 sm:mb-4 font-semibold py-2">
@@ -39,38 +40,42 @@ const Index: NextPage = () => {
                     </div>
                     {/* Templates list */}
                     <div className="grid sm:grid-cols-2 grid-cols-1 gap-8">
-                        {
-                            PUB_LIST.map(({ title, url, items }, i) => (
-                                <div className="shadow-xl h-fit rounded-lg" key={i}>
-                                    <div className="bg-blue-600 text-center py-4 rounded-t-lg">
-                                        <h3 className=" font-semibold text-white">{title.toUpperCase()}</h3>
-                                    </div>
-                                    <ul className="p-8 list-inside bg-white rounded-b-lg">
-                                        {items.map((item, index) => (
-                                            <li className="list-disc py-1" key={index}>
-                                                <Link href={{
-                                                    pathname: '/[section]/[template]',
-                                                    query: { section: url, template: item.url }
-                                                }}>
-                                                    <a className="hover:font-semibold hover:text-blue-600">{item.name}</a>
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
+                        {PUB_LIST.map(({ title, url, items }, i) => (
+                            <div className="shadow-xl h-fit rounded-lg" key={i}>
+                                <div className="bg-blue-600 text-center py-4 rounded-t-lg">
+                                    <h3 className=" font-semibold text-white">{title.toUpperCase()}</h3>
                                 </div>
-                            ))
-                        }
+                                <ul className="p-8 list-inside bg-white rounded-b-lg">
+                                    {items.map((item, index) => (
+                                        <li className="list-disc py-1" key={index}>
+                                            <HyperLink
+                                                className="hover:font-semibold hover:text-blue-600"
+                                                href={`/annonce/create/${url}/${item.url}`}>
+                                                {item.name}
+                                            </HyperLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
-
                     <div className="flex flex-col items-center mx-auto my-4 bg-white rounded-lg border shadow-md md:flex-row md:max-w-5xl">
                         <Image
-                            src="/illustrations/free_mode.jpg"
-                            width={500} height={400}
-                            className="w-full h-9 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                            src={Illustration}
+                            alt="illustration"
+                            width={300} height={300}
+                            objectFit="cover"
+                            className="rounded-lg"
+                            placeholder="blur"
                         />
-                        <div className="flex flex-col justify-between p-4 leading-normal">
-                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-blue-900">Noteworthy technology acquisitions 2021</h5>
-                            <p className="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                        <div className="flex flex-col my-4 p-4 mx-4 md:mx-0 items-center md:items-start text-center md:text-left leading-normal">
+                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-blue-900">Mode de rédaction libre</h5>
+                            <p className="mb-3 font-normal text-gray-700">
+                                Si vous disposez du texte de votre annonce légale vous pouvez le saisir ou le "Copier-Coller" librement.
+                            </p>
+                            <div>
+                                <HyperLink className="btn-blue-primary" href="#">Essayer</HyperLink>
+                            </div>
                         </div>
                     </div>
                 </div>

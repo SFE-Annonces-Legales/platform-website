@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { FunctionComponent, PropsWithChildren } from 'react';
 
 type TextWithImageProps =  PropsWithChildren<{
     title: string;
-    src: string;
+    src:  string | StaticImageData;
     reversed: boolean;
 }>
 
@@ -24,6 +24,7 @@ const TextWithImage: FunctionComponent<TextWithImageProps> = ({ title, children,
                     src={src}
                     width={500} height={400}
                     className="max-w-45"
+                    placeholder='blur'
                 />
             </div>
         </div>

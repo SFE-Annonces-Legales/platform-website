@@ -4,10 +4,12 @@ import FormError from "@/components/base/Forms/FormError";
 import InputField from "@/components/base/Forms/InputField";
 import HyperLink from "@/components/base/HyperLink";
 import UserLayout from "@/components/layouts/UserLayout";
+import http from "@/helpers/http";
 import { useAuth } from "@/hooks/useAuth";
+import City from "@/interfaces/cities";
 import registerValidator from "@/validators/register-validator";
 import { Formik, Form, Field } from "formik";
-import { ReactElement } from "react";
+import { GetStaticProps } from "next";
 
 const INITIAL_USER = {
     acceptedTerms: false,
@@ -23,7 +25,10 @@ const INITIAL_USER = {
     civility: 'm',
 }
 
-const Register = () => {
+
+
+
+const Register = ({ cities }: {cities: City[]}) => {
     const { register } = useAuth({ middleware: 'guest', redirectIfAuthenticated: '/verify-email' })
     return (
         <UserLayout>
@@ -106,7 +111,7 @@ const Register = () => {
                                                 />
                                             </div>
                                         </div>
-                                        <CitySelect name='city' />
+                                        <CitySelect id="city" name='city' cities={cities} />
                                     </section>
 
                                     <section>
@@ -143,6 +148,20 @@ const Register = () => {
             </div>
         </UserLayout>
     );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    let cities: City[] = [];
+    try{
+        const { data } = await http.get('/api/cities');
+        cities = data;
+    } catch(err: any){
+        console.error(err)
+    }
+
+    return { 
+        props: { cities }
+    }
 }
 
 

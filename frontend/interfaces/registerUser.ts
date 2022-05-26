@@ -1,4 +1,3 @@
-import { FormikErrors } from "formik";
 
 export interface RegisterUser {
     acceptedTerms: boolean,

@@ -1,5 +1,7 @@
 import TextWithImage from "@/components/composed/home/TextWithImage";
-
+import Image1 from "@/public/illustrations/time_save.jpg"
+import Image2 from "@/public/illustrations/fill_form.jpg"
+import Image3 from "@/public/illustrations/pay.jpg"
 
 const StepsSection = () => {
     return (
@@ -7,7 +9,7 @@ const StepsSection = () => {
 
             <TextWithImage
                 title="Choisissez le modèle le mieux adapté à votre parution."
-                src="/illustrations/time_save.jpg"
+                src={Image1}
                 reversed={false}
             >
                 Constitution, modification, cessation ou autre, nos mdèles prédefinis sont à votre
@@ -16,7 +18,7 @@ const StepsSection = () => {
 
             <TextWithImage
                 title="Remplissez le formulaire."
-                src="/illustrations/fill_form.jpg"
+                src={Image2}
                 reversed
             >
                 Donner les informations nécessaires pour la création de votre annonce légale.
@@ -25,7 +27,7 @@ const StepsSection = () => {
 
             <TextWithImage
                 title="Procèdez au paiment."
-                src="/illustrations/pay.jpg"
+                src={Image3}
                 reversed={false}
             >
                 Selectionner la forme de paiment qui vous convient,

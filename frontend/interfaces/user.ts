@@ -1,7 +1,9 @@
+import City from "./cities";
+
 export default interface User {
     email: string;
     type: 'pro' | 'particulier';
-    city: string;
+    city: City;
     phone: string;
     fullname: string;
     civility: string;
