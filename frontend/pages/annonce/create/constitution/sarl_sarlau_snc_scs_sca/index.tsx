@@ -4,16 +4,19 @@ import SectionWrapper from "@/components/base/Forms/SectionWrapper";
 import HyperLink from "@/components/base/HyperLink";
 import CreatePubLayout from "@/components/layouts/CreatePubLayout"
 import http from "@/helpers/http";
+import PubProvider, { usePub } from "@/hooks/usePub";
 import City from "@/interfaces/cities";
 import Court from "@/interfaces/courts";
 import sarlValidator from "@/validators/pub-validators/constitution/sarlValidator";
 import { FieldArray, Form, Formik } from "formik";
 import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
 
 
-const ASSOCIE = { type: "physique", civilité: "m", nom: "", prenom: "", adresse: "", denomination: "", rc: "", parts: 0 };
+const ASSOCIE = { type: "physique", qualite: "gérant", civilité: "m", nom: "", prenom: "", adresse: "", denomination: "", rc: "", parts: 0 };
 
 const INITIAL_VALS = {
     acte: "", dateActe: "",
@@ -29,14 +32,19 @@ const INITIAL_VALS = {
 }
 
 const Page = ({ cities, courts }: { cities: City[], courts: Court[] }) => {
-
+    const { pub, setPub } = usePub()
+    const { push, pathname } = useRouter()
+    useEffect(() => { if (pub !== null) { console.log(pub); push(pathname + '/valider') } }, [pub])
     return (
         <CreatePubLayout>
             <Formik
                 initialValues={INITIAL_VALS}
                 validationSchema={sarlValidator}
-                onSubmit={(values, { }) => {
-                    console.table(values)
+                onSubmit={(values, { setSubmitting }) => {
+                    setPub(values);
+
+                    // console.log(pub);
+                    // setSubmitting(false);
                 }}
             >
                 {({ values, isSubmitting }) => (
@@ -45,7 +53,7 @@ const Page = ({ cities, courts }: { cities: City[], courts: Court[] }) => {
                             <PubFormField as={"select"} label="Nature de l'acte" name="acte" >
                                 <option value="" defaultValue={""}>Choisir nature</option>
                                 <option value="ssp">Acte Sous Seing Privé</option>
-                                <option value="an">Acte Authentique</option>
+                                <option value="an">Acte Notarié</option>
                             </PubFormField>
 
                             <PubFormField label="Date de l'acte" name="dateActe" type={"date"} />
@@ -84,6 +92,7 @@ const Page = ({ cities, courts }: { cities: City[], courts: Court[] }) => {
                                         <div key={index}>
                                             {index !== 0 && (
                                                 <button
+                                                    type="button"
                                                     onClick={() => remove(index)}
                                                     className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mt-2">
                                                     <BiMinus className="mr-2" />
@@ -93,6 +102,12 @@ const Page = ({ cities, courts }: { cities: City[], courts: Court[] }) => {
                                             <PubFormField label="Type" name={`associes.${index}.type`} as={"select"}>
                                                 <option value="physique">Personne Physique</option>
                                                 <option value="morale">Personne Morale</option>
+                                            </PubFormField>
+                                            <PubFormField label="Qualité" name={`associes.${index}.qualite`} as={"select"}>
+                                                <option value="gérant">Gérant</option>
+                                                <option value="gérante">Gérante</option>
+                                                <option value="cogérant">Cogérant</option>
+                                                <option value="cogérante">Cogérante</option>
                                             </PubFormField>
                                             {associe.type === "physique" ? (
                                                 <>
@@ -116,6 +131,7 @@ const Page = ({ cities, courts }: { cities: City[], courts: Court[] }) => {
 
                                     ))}
                                     <button
+                                        type="button"
                                         onClick={() => push(ASSOCIE)}
                                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mt-2">
                                         <BiPlus className="mr-2" />
@@ -172,4 +188,4 @@ export const getStaticProps: GetStaticProps = async () => {
         props: { cities, courts }
     }
 }
-export default Page;
+export default (props: { cities: City[], courts: Court[] }) => (<PubProvider><Page {...props} /></PubProvider>);

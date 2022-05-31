@@ -28,11 +28,10 @@ const CreatePubLayout: React.FC<CreatePubLayoutProps> = ({ children }) => {
                             </a>
                         </div>
                     </div>
-
-                    {children}
-
+                    
+                        {children}
+                   
                 </div>
-
             </div>
         </UserLayout>
     );
